@@ -1,9 +1,13 @@
 import axios from "axios";
-import { useState } from "react";
-import { Button } from "./components/ui/button";
+import { useEffect, useState } from "react";
+import "./index.css";
 
 export function App() {
 	const [movies, setMovies] = useState([]);
+
+	useEffect(() => {
+		getMovies();
+	}, []);
 
 	const getMovies = () => {
 		axios({
@@ -14,16 +18,22 @@ export function App() {
 				language: "pt-BR",
 			},
 		}).then((response) => {
-			console.log(response);
+			setMovies(response.data.results);
 		});
 	};
 
 	getMovies();
 
 	return (
-		<div>
-			<h1>Hello World</h1>
-			<Button> Click me</Button>
-		</div>
+		<>
+			<ul className="movie-list">
+				{movies.map((movie) => (
+					<li>
+						<p>{movie.title}</p>
+						<p className="">{movie.overview}</p>
+					</li>
+				))}
+			</ul>
+		</>
 	);
 }
