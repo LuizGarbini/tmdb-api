@@ -10,7 +10,7 @@ import {
 export function Navbar() {
 	return (
 		<div className="flex flex-col">
-			<div className="mx-auto w-full max-w-6xl border-b bg-black px-4 py-2 lg:my-4 lg:rounded-full lg:border">
+			<div className="mx-auto w-full max-w-6xl">
 				<NavigationMenu>
 					<NavigationMenuList>
 						<NavigationMenuItem>

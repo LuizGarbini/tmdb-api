@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./index.css";
 
 export interface MovieType {
+	id: number;
 	title: string;
 	poster_path: string;
 	overview: string;
@@ -29,14 +30,11 @@ export function App() {
 		});
 	};
 
-	getMovies();
-
 	return (
 		<>
 			<ul className="movie-list">
 				{movies.map((movie) => (
-					// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
-					<li>
+					<li key={movie.id}>
 						<p className="text-white">{movie.title}</p>
 						<p className="text-yellow-300">{movie.overview}</p>
 						<img
