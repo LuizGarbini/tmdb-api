@@ -1,17 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { MovieCard } from "./components/MovieCard";
 import "./index.css";
-
-export interface MovieType {
-	id: number;
-	title: string;
-	poster_path: string;
-	overview: string;
-	vote_average: number;
-}
+import type { Movie } from "./types";
 
 export function App() {
-	const [movies, setMovies] = useState<MovieType[]>([]);
+	const [movies, setMovies] = useState<Movie[]>([]);
 
 	useEffect(() => {
 		getMovies();
@@ -32,17 +26,9 @@ export function App() {
 
 	return (
 		<>
-			<ul className="movie-list">
+			<ul>
 				{movies.map((movie) => (
-					<li key={movie.id}>
-						<p className="text-white">{movie.title}</p>
-						<p className="text-yellow-300">{movie.overview}</p>
-						<img
-							src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-							alt=""
-						/>
-						<p className="text-white">{movie.vote_average}</p>
-					</li>
+					<MovieCard key={movie.id} movie={movie} />
 				))}
 			</ul>
 		</>
