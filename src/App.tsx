@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { MovieCard } from "./components/MovieCard";
 import "./index.css";
-import type { Movie } from "./types";
+import type { Movie } from "./types/movie";
 
 export function App() {
 	const [movies, setMovies] = useState<Movie[]>([]);
