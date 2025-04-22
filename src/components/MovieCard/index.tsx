@@ -22,7 +22,6 @@ export function MovieCard(props: Props) {
 			<div>
 				<p className="text-yellow-300">{movie.overview}</p>
 			</div>
-			<p className="text-white">{movie.vote_average}</p>
 		</li>
 	);
 }
