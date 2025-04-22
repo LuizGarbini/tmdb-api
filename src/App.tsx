@@ -2,8 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./index.css";
 
+export interface MovieType {
+	title: string;
+	poster_path: string;
+	overview: string;
+	vote_average: number;
+}
+
 export function App() {
-	const [movies, setMovies] = useState([]);
+	const [movies, setMovies] = useState<MovieType[]>([]);
 
 	useEffect(() => {
 		getMovies();
@@ -14,7 +21,7 @@ export function App() {
 			method: "get",
 			url: "https://api.themoviedb.org/3/discover/movie",
 			params: {
-				api_key: "5428078da291e842d9062de26fc1c031",
+				api_key: import.meta.env.VITE_TMDB_API_TOKEN,
 				language: "pt-BR",
 			},
 		}).then((response) => {
@@ -28,9 +35,15 @@ export function App() {
 		<>
 			<ul className="movie-list">
 				{movies.map((movie) => (
+					// biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
 					<li>
-						<p>{movie.title}</p>
-						<p className="">{movie.overview}</p>
+						<p className="text-white">{movie.title}</p>
+						<p className="text-yellow-300">{movie.overview}</p>
+						<img
+							src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+							alt=""
+						/>
+						<p className="text-white">{movie.vote_average}</p>
 					</li>
 				))}
 			</ul>
