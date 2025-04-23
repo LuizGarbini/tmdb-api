@@ -26,7 +26,7 @@ export function App() {
 
 	return (
 		<>
-			<ul>
+			<ul className="grid grid-cols-6 gap-4grid w-full grid-cols-3 gap-4 md:grid-cols-6">
 				{movies.map((movie) => (
 					<MovieCard key={movie.id} movie={movie} />
 				))}

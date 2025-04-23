@@ -7,7 +7,11 @@ import "./index.css";
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<Navbar />
-		<App />
+		<main className="w-full min-h-screen">
+			<div className="mx-auto max-w-6xl space-y-4 px-4 py-4 lg:px-0">
+				<Navbar />
+				<App />
+			</div>
+		</main>
 	</StrictMode>,
 );
