@@ -8,7 +8,7 @@ import "./index.css";
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<main className="w-full min-h-screen">
-			<div className="mx-auto max-w-6xl space-y-4 px-4 py-4 lg:px-0">
+			<div className="mx-auto max-w-6xl space-y-4 px-4 py-4 lg:px-0 pt-16 pb-16">
 				<Navbar />
 				<App />
 			</div>
