@@ -21,10 +21,10 @@ export function StarRating(props: Props) {
 	return (
 		<div className="flex">
 			{fullStars.map((index) => (
-				<Star className="fill-yellow-300 stroke-0" key={index} />
+				<Star size={18} className="fill-yellow-300 stroke-0" key={index} />
 			))}
 			{emptyStars.map((index) => (
-				<Star className="stroke-1" key={index} />
+				<Star size={18} className="stroke-1" key={index} />
 			))}
 		</div>
 	);

@@ -8,7 +8,7 @@ export interface Props {
 export function MovieCard(props: Props) {
 	const movie = props.movie;
 	return (
-		<li>
+		<li className="flex flex-col gap-1">
 			<div>
 				<img
 					src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
