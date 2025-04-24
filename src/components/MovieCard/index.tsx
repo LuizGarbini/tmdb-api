@@ -9,24 +9,31 @@ export interface Props {
 export function MovieCard(props: Props) {
 	const movie = props.movie;
 	return (
-		<li className="flex flex-col gap-1 relative">
+		<li className="group flex flex-col gap-1 relative hover:cursor-pointer">
 			<div>
 				<img
+					className="transition-opacity duration-600 group-hover:opacity-50"
 					src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
 					alt={movie.title}
 				/>
 			</div>
-			<div className="absolute bottom-0 bg-[linear-gradient(#00000000,_#000000_90%)]">
+			<div className="flex flex-col gap-1.5 absolute bottom-0 bg-[linear-gradient(#00000000,_#000000_90%)] justify-end p-2.5">
 				<div>
-					<p className="text-white">{movie.title}</p>
+					<p className="text-white text-xs">{movie.title}</p>
 				</div>
 				<StarRating rating={movie.vote_average} />
-			</div>
-			<div className="overflow-hidden h-0 opacity-0 relative">
-				<div>
-					<p className="text-yellow-300">{movie.overview}</p>
+				<div className="flex flex-col gap-1.5 overflow-hidden h-0 opacity-0 relative group-hover:opacity-100 group-hover:h-24 transition-all duration-600">
+					<div>
+						{movie.overview && (
+							<p className="text-white text-xs">
+								{movie.overview.length > 90
+									? `${movie.overview.substring(0, 90)}...`
+									: movie.overview}
+							</p>
+						)}
+					</div>
+					<Button className="text-xs">Ver mais</Button>
 				</div>
-				<Button>Ver mais</Button>
 			</div>
 		</li>
 	);
