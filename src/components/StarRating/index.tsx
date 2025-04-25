@@ -5,12 +5,12 @@ export interface Props {
 }
 
 export function StarRating(props: Props) {
-	const numStars = Math.round(props.rating / 2);
+	const numStars = Math.round(props.rating);
 
 	const fullStars = [];
 	const emptyStars = [];
 
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 10; i++) {
 		if (i < numStars) {
 			fullStars.push(i);
 		} else {
