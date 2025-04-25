@@ -54,6 +54,11 @@ export function App() {
 				value={selectedGenre?.toString() ?? ""}
 				onValueChange={(value) => {
 					const genreId = value ? Number(value) : null;
+					if (value === "all") {
+						setSelectedGenre(null);
+						getMovies(undefined);
+						return;
+					}
 					setSelectedGenre(genreId);
 					getMovies(genreId ?? undefined);
 				}}
