@@ -70,7 +70,7 @@ export function App() {
 
 	return (
 		<>
-			<div className="flex gap-4">
+			<div className="flex flex-col gap-4 sm:flex-row">
 				<div className="flex-1">
 					<Select
 						value={selectedGenre ?? ""}
