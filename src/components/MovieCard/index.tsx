@@ -7,6 +7,7 @@ export interface Props {
 
 export function MovieCard(props: Props) {
 	const movie = props.movie;
+
 	return (
 		<li className="group flex flex-col gap-1 relative hover:cursor-pointer">
 			<div>
@@ -32,6 +33,7 @@ export function MovieCard(props: Props) {
 						)}
 					</div>
 				</div>
+				<span>{movie.release_date}</span>
 			</div>
 		</li>
 	);

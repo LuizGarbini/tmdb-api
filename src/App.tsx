@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { MovieCard } from "./components/MovieCard";
+import { Label } from "./components/ui/label";
 import {
 	Select,
 	SelectContent,
@@ -21,11 +22,14 @@ export function App() {
 	const [selectedVote, setSelectedVote] = useState<number | undefined>(
 		undefined,
 	);
+	const [selectedDate, setSelectedDate] = useState<string | undefined>(
+		undefined,
+	);
 
 	useEffect(() => {
-		getMovies(selectedGenre, selectedVote);
+		getMovies(selectedGenre, selectedVote, selectedDate);
 		getGenres();
-	}, [selectedGenre, selectedVote]);
+	}, [selectedGenre, selectedVote, selectedDate]);
 
 	const getGenres = () => {
 		axios({
@@ -40,7 +44,7 @@ export function App() {
 		});
 	};
 
-	const getMovies = async (genreId?: string, vote?: number) => {
+	const getMovies = async (genreId?: string, vote?: number, year?: string) => {
 		axios({
 			method: "get",
 			url: "https://api.themoviedb.org/3/discover/movie",
@@ -49,11 +53,18 @@ export function App() {
 				language: "pt-BR",
 				with_genres: genreId,
 				"vote_average.gte": vote,
+				primary_release_year: Number(year),
 			},
 		}).then((response) => {
 			setMovies(response.data.results);
 		});
 	};
+
+	const currentYear = new Date().getFullYear();
+	const years = Array.from(
+		{ length: currentYear - 1990 + 1 },
+		(_, i) => currentYear - i,
+	);
 
 	return (
 		<>
@@ -62,11 +73,10 @@ export function App() {
 				onValueChange={(value) => {
 					const genreId = value === "all" ? undefined : value;
 					setSelectedGenre(genreId);
-					console.log(genreId);
 				}}
 			>
 				<SelectTrigger className="w-[200px]">
-					<SelectValue placeholder="Selecione um gênero" />
+					<SelectValue placeholder="Todos os gêneros" />
 				</SelectTrigger>
 				<SelectContent>
 					<SelectItem value="all">Todos os gêneros</SelectItem>
@@ -78,17 +88,41 @@ export function App() {
 				</SelectContent>
 			</Select>
 
-			<Slider
-				defaultValue={[0.5]}
-				value={selectedVote ? [selectedVote] : [0.5]}
+			<div className="flex flex-col gap-2">
+				<Label htmlFor="rating">Avaliação Mínima: {selectedVote}</Label>
+				<Slider
+					id="rating"
+					defaultValue={[0.5]}
+					value={selectedVote ? [selectedVote] : [0.5]}
+					onValueChange={(value) => {
+						const vote = value[0];
+						setSelectedVote(vote);
+					}}
+					max={10}
+					step={0.5}
+					min={0.5}
+				/>
+			</div>
+
+			<Select
+				value={selectedDate ?? ""}
 				onValueChange={(value) => {
-					const vote = value[0];
-					setSelectedVote(vote);
+					const yearDate = value === "all" ? undefined : value;
+					setSelectedDate(yearDate);
 				}}
-				max={10}
-				step={0.5}
-				min={0.5}
-			/>
+			>
+				<SelectTrigger className="w-[200px]">
+					<SelectValue placeholder="Todos os anos" />
+				</SelectTrigger>
+				<SelectContent>
+					<SelectItem value="all">Todas as Datas</SelectItem>
+					{years.map((year) => (
+						<SelectItem key={year} value={year.toString()}>
+							{year}
+						</SelectItem>
+					))}
+				</SelectContent>
+			</Select>
 
 			<ul className="grid gap-4 w-full grid-cols-3 md:grid-cols-5">
 				{movies.map((movie) => (
