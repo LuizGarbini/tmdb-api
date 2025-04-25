@@ -5,27 +5,12 @@ export interface Props {
 }
 
 export function StarRating(props: Props) {
-	const numStars = Math.round(props.rating);
-
-	const fullStars = [];
-	const emptyStars = [];
-
-	for (let i = 0; i < 10; i++) {
-		if (i < numStars) {
-			fullStars.push(i);
-		} else {
-			emptyStars.push(i);
-		}
-	}
+	const numStars = props.rating.toFixed(1);
 
 	return (
-		<div className="flex">
-			{fullStars.map((index) => (
-				<Star size={18} className="fill-yellow-300 stroke-0" key={index} />
-			))}
-			{emptyStars.map((index) => (
-				<Star size={18} className="stroke-1" key={index} />
-			))}
+		<div className="flex items-center gap-0.5">
+			<Star size={18} className="fill-yellow-300 stroke-0" />
+			<p className="text-xs">{numStars}</p>
 		</div>
 	);
 }

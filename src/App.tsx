@@ -8,6 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "./components/ui/select";
+import { Slider } from "./components/ui/slider";
 import "./index.css";
 import type { Movie } from "./types/movie";
 
@@ -17,7 +18,7 @@ export function App() {
 	const [selectedGenre, setSelectedGenre] = useState<string | undefined>(
 		undefined,
 	);
-	const [selectedVote, setSelectedVote] = useState<string | undefined>(
+	const [selectedVote, setSelectedVote] = useState<number | undefined>(
 		undefined,
 	);
 
@@ -39,7 +40,7 @@ export function App() {
 		});
 	};
 
-	const getMovies = async (genreId?: string, vote?: string) => {
+	const getMovies = async (genreId?: string, vote?: number) => {
 		axios({
 			method: "get",
 			url: "https://api.themoviedb.org/3/discover/movie",
@@ -77,50 +78,17 @@ export function App() {
 				</SelectContent>
 			</Select>
 
-			<Select
-				value={selectedVote ?? ""}
+			<Slider
+				defaultValue={[0.5]}
+				value={selectedVote ? [selectedVote] : [0.5]}
 				onValueChange={(value) => {
-					const vote = value === "all" ? undefined : value;
+					const vote = value[0];
 					setSelectedVote(vote);
 				}}
-			>
-				<SelectTrigger className="w-[200px]">
-					<SelectValue placeholder="Selecione uma nota minima" />
-				</SelectTrigger>
-				<SelectContent>
-					<SelectItem value="all">Sem preferência</SelectItem>
-					<SelectItem key={1} value={"1"}>
-						1
-					</SelectItem>
-					<SelectItem key={2} value={"2"}>
-						2
-					</SelectItem>
-					<SelectItem key={3} value={"3"}>
-						3
-					</SelectItem>
-					<SelectItem key={4} value={"4"}>
-						4
-					</SelectItem>
-					<SelectItem key={5} value={"5"}>
-						5
-					</SelectItem>
-					<SelectItem key={6} value={"6"}>
-						6
-					</SelectItem>
-					<SelectItem key={7} value={"7"}>
-						7
-					</SelectItem>
-					<SelectItem key={8} value={"8"}>
-						8
-					</SelectItem>
-					<SelectItem key={9} value={"9"}>
-						9
-					</SelectItem>
-					<SelectItem key={10} value={"10"}>
-						10
-					</SelectItem>
-				</SelectContent>
-			</Select>
+				max={10}
+				step={0.5}
+				min={0.5}
+			/>
 
 			<ul className="grid gap-4 w-full grid-cols-3 md:grid-cols-5">
 				{movies.map((movie) => (
