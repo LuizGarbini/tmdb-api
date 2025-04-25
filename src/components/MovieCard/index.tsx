@@ -1,6 +1,5 @@
 import type { Movie } from "@/types/movie";
 import { StarRating } from "../StarRating";
-import { Button } from "../ui/button";
 
 export interface Props {
 	movie: Movie;
@@ -21,8 +20,8 @@ export function MovieCard(props: Props) {
 				<div>
 					<p className="text-white text-xs">{movie.title}</p>
 				</div>
-				<StarRating rating={movie.vote_average} />
-				<div className="flex flex-col gap-1.5 overflow-hidden h-0 opacity-0 relative group-hover:opacity-100 group-hover:h-24 transition-all duration-600">
+				{movie.vote_average > 0 && <StarRating rating={movie.vote_average} />}
+				<div className="flex flex-col gap-1.5 overflow-hidden h-0 opacity-0 relative group-hover:opacity-100 group-hover:h-12 transition-all duration-600">
 					<div>
 						{movie.overview && (
 							<p className="text-white text-xs">
@@ -32,7 +31,6 @@ export function MovieCard(props: Props) {
 							</p>
 						)}
 					</div>
-					<Button className="text-xs">Ver mais</Button>
 				</div>
 			</div>
 		</li>
