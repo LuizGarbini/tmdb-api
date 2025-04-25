@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 import { Navbar } from "./components/Navbar/index.tsx";
+import { Toaster } from "./components/ui/sonner.tsx";
 import "./index.css";
 
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -11,6 +12,7 @@ createRoot(document.getElementById("root")!).render(
 			<div className="mx-auto max-w-6xl space-y-4 px-4 py-4 lg:px-0 pt-16 pb-16">
 				<Navbar />
 				<App />
+				<Toaster />
 			</div>
 		</main>
 	</StrictMode>,

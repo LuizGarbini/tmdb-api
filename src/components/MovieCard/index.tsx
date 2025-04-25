@@ -33,7 +33,6 @@ export function MovieCard(props: Props) {
 						)}
 					</div>
 				</div>
-				<span>{movie.release_date}</span>
 			</div>
 		</li>
 	);
