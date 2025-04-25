@@ -58,6 +58,7 @@ export function App() {
 				primary_release_year: Number(year),
 			},
 		}).then((response) => {
+			console.log(response);
 			setMovies(response.data.results);
 		});
 	};
