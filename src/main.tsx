@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
-import { Navbar } from "./components/Navbar/index.tsx";
+import { Navbar } from "./components/navbar.tsx";
 import { Toaster } from "./components/ui/sonner.tsx";
 import "./index.css";
 

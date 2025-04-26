@@ -1,5 +1,5 @@
 import type { Movie } from "@/types/movie";
-import { StarRating } from "../StarRating";
+import { StarRating } from "./star-rating";
 
 export interface Props {
 	movie: Movie;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { MovieCard } from "./components/MovieCard";
+import { MovieCard } from "./components/movie-card";
 import { Label } from "./components/ui/label";
 import {
 	Select,
@@ -58,7 +58,6 @@ export function App() {
 				primary_release_year: Number(year),
 			},
 		}).then((response) => {
-			console.log(response);
 			setMovies(response.data.results);
 		});
 	};
